@@ -1,0 +1,17 @@
+version: '2.4'
+
+services:
+
+  uwsgi:
+    # Note you cannot scale if you use container_name
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: uwsgi
+    sysctls:
+      net.core.somaxconn: 1024
+    restart: always
+    ports:
+      - "84:8080"
+    cap_add:
+      - SYS_PTRACE
